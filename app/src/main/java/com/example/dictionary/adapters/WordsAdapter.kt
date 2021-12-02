@@ -25,14 +25,18 @@ class WordsAdapter: RecyclerView.Adapter<WordsAdapter.ViewHolder>() {
         private lateinit var dataModel: Words
         fun bind(){
             dataModel = wordsData[adapterPosition]
-
+            with(binding){
+                word.text = dataModel.word
+                definition.text = dataModel.origin
+                example.text = dataModel.meanings?.get(0)?.definitions?.get(0)?.example
+                partOfSpeech.text = dataModel.meanings?.get(0)?.definitions?.get(0)?.definition
+            }
         }
     }
 
-    fun setData(data: List<Words>?){
+    fun setData(data: List<Words>){
         wordsData.clear()
-        if (data != null) {
-            wordsData.addAll(data)
-        }
+        wordsData.addAll(data)
+        notifyDataSetChanged()
     }
 }

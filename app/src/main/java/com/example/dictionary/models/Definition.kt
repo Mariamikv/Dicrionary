@@ -4,6 +4,8 @@ package com.example.dictionary.models
 import com.google.gson.annotations.SerializedName
 
 data class Definition(
+    @SerializedName("antonyms")
+    val antonyms: List<Any>?,
     @SerializedName("definition")
     val definition: String?,
     @SerializedName("example")

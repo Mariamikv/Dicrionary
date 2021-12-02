@@ -1,5 +1,6 @@
 package com.example.dictionary.view_models
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,15 +13,17 @@ import kotlinx.coroutines.withContext
 
 class SearchViewModel(private val dictionaryRepository: DictionaryRepository): ViewModel() {
 
-    fun init(){
+
+
+    var getWords = MutableLiveData<List<Words>>()
+
+    suspend fun getWords(word: String): LiveData<List<Words>> {
+
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                getWords()
+            withContext(Dispatchers.IO) {
+                getWords = dictionaryRepository.getWordsList(word)
             }
         }
-    }
-
-     suspend fun getWords(): LiveData<List<Words>> {
-        return dictionaryRepository.getWordsList()
+        return getWords
     }
 }

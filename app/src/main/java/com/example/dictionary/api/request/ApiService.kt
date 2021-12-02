@@ -7,5 +7,5 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("en/{word}")
-    suspend fun wordsList(@Path("word") word: String): Result<List<Words>>
+    suspend fun wordsList(@Path("word") word: String): Response<List<Words>>
 }
